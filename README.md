@@ -59,7 +59,7 @@ query_text  able%0Ato
 
 Remember in the "Value" textbox, you have to enter the urlencoded "able%0Ato", and not "able\nto", since Swagger will escape encode backslash "\" to "%5c" and not "\n" to "%0A". 
 
-Searching across more than 2 lines, e.g., `text1\ntext2\ntext3` is not implemented, but can be down with slight modification of the code. 
+Searching across more than 2 lines, e.g., `text1\ntext2\ntext3` is not implemented, but can be done with slight modification of the code. 
 
 The algorithm will search any .txt files under `flask_query_api/api/query/files`. However do not put more then 1 .txt file in the directory. 
 
