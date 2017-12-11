@@ -3,10 +3,10 @@ flask_query_api
 
 This repository contains for a RESTful API based on Flask and Flask-RESTPlus to do a text search based on api query.
 
-#Requirements
+##Requirements
 Python 3
 
-#Installation and Usage (AWS EC2 Ubuntu)
+##Installation and Usage (AWS EC2 Ubuntu)
 
 ```
 $ sudo apt-get install python3 python3-venv python3-pip
@@ -64,7 +64,7 @@ Searching across more than 2 lines, e.g., `text1\ntext2\ntext3` is not implement
 
 The algorithm will search any .txt files under `flask_query_api/api/query/files`. However do not put more then 1 .txt file in the directory. 
 
-#Discussions
+##Discussions
 
 1. Testing
 
