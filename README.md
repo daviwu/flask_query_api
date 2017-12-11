@@ -78,6 +78,21 @@ The algorithm will search any .txt files under `flask_query_api/api/query/files`
    The sequential search traverse a file line by line with the default python iterator. The search speed is `O(N)` for file size `N`. For `m` consecutive queries, the speed is `O(m*N)`. As you can see from the test cases, searching on the entire Shakespeare's text takes about 4 seconds. 
 
    The text loading for sentence tokenization is paragraph by paragraph (using a modified `read_blankline_block` from nltk). It reads line by line until end of paragraph, then pass to the sentence tokenizer. For large texts, only one paragraph and not the entire document would be loaded into memory. This should be okay for most corpi where a single paragraph can easily fit into memory. If the corpus has unusually large paragraphs, then the code needs to be modified. 
+   
+   A trie/dawg data structure is being worked on, building dictionary line by line with
+   
+```
+for length in range(1, len(line)+1):
+  for start_pos in range(0, len(line)-length+1):
+      keys.append(line[start_pos:start_pos+length])
+      values.append((lineno, start_pos+1, start_pos+length+1,
+                     bytearray(sent_no_linebreak.strip(),'utf-8'))) #(line,start,end,in_sentence)
+
+value_format = ">LLL64s"
+data = zip(keys, values)
+record_dawg = dawg.RecordDAWG(value_format, data)
+```
+   Which will have build time of O(N) and lookup time of O(1), but I may not have time to finish. 
 
 **4. Error handling and REST status codes**
 
