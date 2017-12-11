@@ -1,5 +1,4 @@
-flask_query_api
-=============
+#flask_query_api
 
 This repository contains for a RESTful API based on Flask and Flask-RESTPlus to do a text search based on api query.
 
