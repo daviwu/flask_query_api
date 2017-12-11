@@ -85,9 +85,11 @@ The algorithm will search any .txt files under `flask_query_api/api/query/files`
 
    The marisa-Trie search have build time of O(N) and lookup time of O(1).
 
-   The sequential search traverse a file line by line with the default python iterator. The search speed is `O(N)` for file size `N`. For `m` consecutive queries, the speed is `O(m*N)`. As you can see from the test cases, searching on the entire Shakespeare's text takes about 4 seconds. 
+   The sequential search traverse a file line by line with the default python iterator. The search speed is `O(N)` for file size `N`. For `m` consecutive queries, the speed is `O(m*N)`. 
 
    The text loading for sentence tokenization is paragraph by paragraph (using a modified `read_blankline_block` from nltk). It reads line by line until end of paragraph, then pass to the sentence tokenizer. For large texts, only one paragraph and not the entire document would be loaded into memory. This should be okay for most corpi where a single paragraph can easily fit into memory. If the corpus has unusually large paragraphs, then the code needs to be modified. 
+   
+   For building a dictionary on a large file (e.g. entire Shakespeare, ~10mb) paging will occur. For future work if had more time, should explore to use the marisa-trie / DAWG stream writer to write to disk and have dict building evoked by app.py start-up initilization, rather than api-call to avoid connection time-out. 
    
 **4. Error handling and REST status codes**
 
