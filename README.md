@@ -1,11 +1,11 @@
-#flask_query_api
+# flask_query_api
 
 This repository contains for a RESTful API based on Flask and Flask-RESTPlus to do a text search based on api query.
 
-##Requirements
+## Requirements
 Python 3
 
-##Installation and Usage (AWS EC2 Ubuntu)
+## Installation and Usage (AWS EC2 Ubuntu)
 
 ```
 $ sudo apt-get install python3 python3-venv python3-pip
@@ -63,23 +63,27 @@ Searching across more than 2 lines, e.g., `text1\ntext2\ntext3` is not implement
 
 The algorithm will search any .txt files under `flask_query_api/api/query/files`. However do not put more then 1 .txt file in the directory. 
 
-##Discussions
+## Discussions
 
-1. Testing
+**1. Testing**
 
-   When the server is live, you can run the unit tests with `python flask_query_api/test/unit_tests.py`. It will copy a `shakespeare.txt` file into `flask_query_api/api/query/files` for testing, and remove it when finished. 
+   When the server is live, you can run the unit tests with `python flask_query_api/test/unit_tests.py`. It will copy a `shakespeare.txt` file into `flask_query_api/api/query/files` for testing, and remove it when finished. Depending on the corpus, abbreviations can be trained (unsupervised) on the corpus and added to the nltk punkt sentence tokenizer. 
 
-2. API Documentation
+**2. API Documentation**
 
    See `http://localhost:8800/api/`
 
-3. Data structures
+**3. Data structures**
 
    The sequential search traverse a file line by line with the default python iterator. The search speed is `O(N)` for file size `N`. For `m` consecutive queries, the speed is `O(m*N)`. As you can see from the test cases, searching on the entire Shakespeare's text takes about 4 seconds. 
 
    The text loading for sentence tokenization is paragraph by paragraph (using a modified `read_blankline_block` from nltk). It reads line by line until end of paragraph, then pass to the sentence tokenizer. For large texts, only one paragraph and not the entire document would be loaded into memory. This should be okay for most corpi where a single paragraph can easily fit into memory. If the corpus has unusually large paragraphs, then the code needs to be modified. 
 
-4. Error handling and REST status codes are provided using the Flask-RESTPlus framework. Depending on the corpus, abbreviations can be trained (unsupervised) on the corpus and added to the nltk punkt sentence tokenizer. 
+**4. Error handling and REST status codes**
 
-5. Deployment instructions for AWS EC2 is provided above. For production enviornment, change `flask_query_api/settings.py` `FLASK_SERVER_NAME` to the production server FQDN name and port, and change `FLASK_DEBUG` to False.
+Provided using the Flask-RESTPlus framework. 
+
+**5. Deployment instructions**
+
+Deployment for AWS EC2 is provided above. For production enviornment, change `flask_query_api/settings.py` `FLASK_SERVER_NAME` to the production server FQDN name and port, and change `FLASK_DEBUG` to False.
 
