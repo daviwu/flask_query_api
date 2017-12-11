@@ -174,6 +174,17 @@ class TestClass(unittest.TestCase):
         self.assertEqual(data['occurences'][24]['line'], 28229)
         self.assertEqual(data['occurences'][24]['start'], 8)
         self.assertEqual(data['occurences'][24]['end'], 15)
+
+    def test_10_query_trie(self):
+        query_text = "Now is"
+        url = server_url + "/api/query_trie/" + query_text
+        response = requests.get(url)
+        data = response.json()
+
+        self.assertEqual(data['number_of_occurrences'], 3)
+        self.assertEqual(data['occurences'][0]['line'], 45)
+        self.assertEqual(data['occurences'][0]['start'], 17)
+        self.assertEqual(data['occurences'][0]['end'], 23)
    
 if __name__ == '__main__':
     unittest.main()    

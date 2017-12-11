@@ -3,6 +3,7 @@ import logging.config
 from flask import Flask, Blueprint
 from flask_query_api import settings
 from flask_query_api.api.query.endpoints.sequential import ns as query_sequential_namespace
+from flask_query_api.api.query.endpoints.dict import ns as query_dict_namespace
 from flask_query_api.api.restplus import api
 
 app = Flask(__name__)
@@ -24,10 +25,8 @@ def initialize_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
     api.add_namespace(query_sequential_namespace)
+    api.add_namespace(query_dict_namespace)
     flask_app.register_blueprint(blueprint)
-
-    #db.init_app(flask_app)
-
 
 def main():
     initialize_app(app)
