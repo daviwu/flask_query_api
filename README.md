@@ -75,7 +75,7 @@ The algorithm will search any .txt files under `flask_query_api/api/query/files`
 
 **1. Testing**
 
-   When the server is live, you can run the unit tests with `python flask_query_api/test/unit_tests.py`. It will copy a `shakespeare.txt` file into `flask_query_api/api/query/files` for testing, and remove it when finished. Depending on the corpus, abbreviations can be trained (unsupervised) on the corpus and added to the nltk punkt sentence tokenizer. 
+   When the server is live, you can run the unit tests with `python flask_query_api/test/unit_tests.py`. It will copy a `shakespeare.txt` and other test text files into `flask_query_api/api/query/files` for testing, and remove it when finished. Depending on the corpus, abbreviations can be trained (unsupervised) on the corpus and added to the nltk punkt sentence tokenizer. 
 
 **2. API Documentation**
 
